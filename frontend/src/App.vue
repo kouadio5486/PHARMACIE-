@@ -2,6 +2,7 @@
 import AppHeader from './components/AppHeader.vue'
 import BaseButton from './components/BaseButton.vue'
 import BaseCard from './components/BaseCard.vue'
+import heroImage from './assets/phar.jpg'
 
 const features = [
   {
@@ -74,7 +75,7 @@ const features = [
     <AppHeader />
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${heroImage})` }">
       <div class="container">
         <div class="hero-content">
           <h1 class="hero-title">PharmaCI</h1>
@@ -144,27 +145,36 @@ const features = [
 
 /* Hero Section */
 .hero-section {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
   padding: 80px 0;
-  background: linear-gradient(135deg, var(--accent-bg) 0%, var(--bg) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-content {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-title {
   font-size: 64px;
   margin-bottom: 16px;
-  color: var(--accent);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
   font-size: 20px;
-  color: var(--text);
+  color: white;
   margin-bottom: 40px;
   line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero-buttons {
@@ -172,6 +182,10 @@ const features = [
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.hero-buttons :deep(.base-button) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Features Section */

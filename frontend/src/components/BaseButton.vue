@@ -57,9 +57,9 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 .variant-secondary {
-  background: var(--accent-bg);
+  background: white;
   color: var(--accent);
-  border: 1px solid var(--accent-border);
+  border: 2px solid var(--accent);
 }
 
 .variant-outline {
@@ -69,8 +69,8 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 .size-small {
-  padding: 6px 12px;
-  font-size: 14px;
+  padding: 4px 10px;
+  font-size: 13px;
 }
 
 .size-medium {

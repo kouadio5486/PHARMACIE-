@@ -21,7 +21,7 @@ const navItems = [
       <div class="header-content">
         <div class="logo">
           <img :src="logoImage" alt="Logo PharmaCI" class="logo-image" />
-          <span class="logo-text">PharmaCI</span>
+          <span class="logo-text">PhmCI</span>
         </div>
 
         <nav class="desktop-nav">
@@ -78,36 +78,33 @@ const navItems = [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 65px;
-  gap: 25px;
+  min-height: 80px;
+  gap: 30px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex-shrink: 0;
 }
 
 .logo-image {
-  height: 60px;
+  height: 73px;
   width: auto;
   object-fit: contain;
 }
 
 .logo-text {
-  font-size: 30px;
-  font-weight: 800;
+  font-size: 26px;
+  font-weight: 700;
   color: var(--accent);
   font-family: var(--heading);
-  letter-spacing: -0.5px;
 }
 
 .desktop-nav {
   display: flex;
-  gap: 25px;
-  flex: 1;
-  justify-content: center;
+  gap: 32px;
 }
 
 .nav-link {
