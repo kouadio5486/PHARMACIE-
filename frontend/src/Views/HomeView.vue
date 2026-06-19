@@ -59,10 +59,10 @@ const features = [
       <symbol id="shopping-cart" viewBox="0 0 24 24">
         <circle cx="9" cy="21" r="1" />
         <circle cx="20" cy="21" r="1" />
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 0 0 0 2-1.61L23 6H6" />
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
       </symbol>
       <symbol id="file-text" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 0 0 0 2 2h12a2 0 0 0 2-2V8z" />
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="16" y1="13" x2="8" y2="13" />
         <line x1="16" y1="17" x2="8" y2="17" />
@@ -104,93 +104,82 @@ const features = [
         </div>
       </div>
     </section>
-     <!-- ===== medicaments SECTION ===== -->
-      
-<section id="medicaments" class="medicaments-section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Médicaments populaires</h2>
-      <p class="section-subtitle">
-        Découvrez quelques médicaments couramment utilisés
-      </p>
-    </div>
 
-    <div class="medicaments-grid">
-
-      <!-- Médicament 1 -->
-      <BaseCard class="medicament-card" variant="elevated">
-        <div class="medicament-image">
-          <img :src="paracetamolImage" alt="Paracétamol" />
-          <div class="medicament-category antalgique">
-            Antalgique
-          </div>
-        </div>
-
-        <div class="medicament-content">
-          <h3 class="medicament-title">Paracétamol</h3>
-
-          <p class="medicament-description">
-            Utilisé pour soulager les douleurs légères à modérées
-            et réduire la fièvre.
+    <!-- Médicaments Section -->
+    <section id="medicaments" class="medicaments-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Médicaments populaires</h2>
+          <p class="section-subtitle">
+            Découvrez quelques médicaments couramment utilisés
           </p>
-
-          <div class="medicament-meta">
-            <span class="dosage">500 mg</span>
-            <span class="forme">Comprimé</span>
-          </div>
-        </div>
-      </BaseCard>
-
-      <!-- Médicament 2 -->
-      <BaseCard class="medicament-card" variant="elevated">
-        <div class="medicament-image">
-          <img :src="amoxicillineImage" alt="Amoxicilline" />
-          <div class="medicament-category antibiotique">
-            Antibiotique
-          </div>
         </div>
 
-        <div class="medicament-content">
-          <h3 class="medicament-title">Amoxicilline</h3>
+        <div class="medicaments-grid">
+          <!-- Médicament 1 -->
+          <BaseCard class="medicament-card" variant="elevated">
+            <div class="medicament-image">
+              <img :src="paracetamolImage" alt="Paracétamol" />
+              <div class="medicament-category antalgique">
+                Antalgique
+              </div>
+            </div>
+            <div class="medicament-content">
+              <h3 class="medicament-title">Paracétamol</h3>
+              <p class="medicament-description">
+                Utilisé pour soulager les douleurs légères à modérées
+                et réduire la fièvre.
+              </p>
+              <div class="medicament-meta">
+                <span class="dosage">500 mg</span>
+                <span class="forme">Comprimé</span>
+              </div>
+            </div>
+          </BaseCard>
 
-          <p class="medicament-description">
-            Antibiotique utilisé pour traiter diverses infections
-            bactériennes.
-          </p>
+          <!-- Médicament 2 -->
+          <BaseCard class="medicament-card" variant="elevated">
+            <div class="medicament-image">
+              <img :src="amoxicillineImage" alt="Amoxicilline" />
+              <div class="medicament-category antibiotique">
+                Antibiotique
+              </div>
+            </div>
+            <div class="medicament-content">
+              <h3 class="medicament-title">Amoxicilline</h3>
+              <p class="medicament-description">
+                Antibiotique utilisé pour traiter diverses infections
+                bactériennes.
+              </p>
+              <div class="medicament-meta">
+                <span class="dosage">500 mg</span>
+                <span class="forme">Gélule</span>
+              </div>
+            </div>
+          </BaseCard>
 
-          <div class="medicament-meta">
-            <span class="dosage">500 mg</span>
-            <span class="forme">Gélule</span>
-          </div>
+          <!-- Médicament 3 -->
+          <BaseCard class="medicament-card" variant="elevated">
+            <div class="medicament-image">
+              <img :src="metformineImage" alt="Metformine" />
+              <div class="medicament-category diabete">
+                Antidiabétique
+              </div>
+            </div>
+            <div class="medicament-content">
+              <h3 class="medicament-title">Metformine</h3>
+              <p class="medicament-description">
+                Médicament utilisé pour le traitement du diabète de type 2.
+              </p>
+              <div class="medicament-meta">
+                <span class="dosage">850 mg</span>
+                <span class="forme">Comprimé</span>
+              </div>
+            </div>
+          </BaseCard>
         </div>
-      </BaseCard>
-
-      <!-- Médicament 3 -->
-      <BaseCard class="medicament-card" variant="elevated">
-        <div class="medicament-image">
-          <img :src="metformineImage" alt="Metformine" />
-          <div class="medicament-category diabete">
-            Antidiabétique
-          </div>
-        </div>
-
-        <div class="medicament-content">
-          <h3 class="medicament-title">Metformine</h3>
-
-          <p class="medicament-description">
-            Médicament utilisé pour le traitement du diabète de type 2.
-          </p>
-
-          <div class="medicament-meta">
-            <span class="dosage">850 mg</span>
-            <span class="forme">Comprimé</span>
-          </div>
-        </div>
-      </BaseCard>
-
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -216,99 +205,15 @@ const features = [
 </template>
 
 <style scoped>
-  /* ===== MEDICAMENTS SECTION ===== */
-  .medicaments-section {
-  padding: 100px 0;
-  background: #f8fafc;
-}
-
-.medicaments-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.medicament-card {
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.medicament-card:hover {
-  transform: translateY(-8px);
-}
-
-.medicament-image {
-  position: relative;
-  height: 220px;
-}
-
-.medicament-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.medicament-category {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.antalgique {
-  background: #10b981;
-}
-
-.antibiotique {
-  background: #3b82f6;
-}
-
-.diabete {
-  background: #f59e0b;
-}
-
-.medicament-content {
-  padding: 1.5rem;
-}
-
-.medicament-title {
-  font-size: 1.3rem;
-  margin-bottom: 0.8rem;
-  color: #1f2937;
-}
-
-.medicament-description {
-  color: #6b7280;
-  line-height: 1.6;
-}
-
-.medicament-meta {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-}
-
-.dosage {
-  color: #2563eb;
-}
-
-.forme {
-  color: #10b981;
-}
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Hero Section  pour agrandir image*/
+/* Hero Section */
 .hero-section {
-  min-height: 100vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -322,6 +227,7 @@ const features = [
   position: relative;
   left: 0;
   right: 0;
+  margin-bottom: 0;
 }
 
 .hero-content {
@@ -334,17 +240,17 @@ const features = [
 }
 
 .hero-title {
-  font-size: 64px;
-  margin-bottom: 16px;
+  font-size: 56px;
+  margin-bottom: 10px;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-  font-size: 20px;
+  font-size: 18px;
   color: white;
-  margin-bottom: 40px;
-  line-height: 1.6;
+  margin-bottom: 24px;
+  line-height: 1.5;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -361,7 +267,7 @@ const features = [
 
 /* Features Section */
 .features-section {
-  padding: 80px 0;
+  padding: 40px 0 20px;
 }
 
 .section-title {
@@ -410,6 +316,111 @@ const features = [
 .feature-description {
   color: var(--text);
   line-height: 1.6;
+}
+
+/* Médicaments Section */
+.medicaments-section {
+  padding: 30px 0 80px;
+  background: #f8fafc;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.medicaments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.medicament-card {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.medicament-card :deep(.base-card) {
+  padding: 0;
+}
+
+.medicament-card:hover {
+  transform: translateY(-8px);
+}
+
+.medicament-image {
+  position: relative;
+  height: 220px;
+}
+
+.medicament-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.medicament-category {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.antalgique {
+  background: #10b981;
+}
+
+.antibiotique {
+  background: #3b82f6;
+}
+
+.diabete {
+  background: #f59e0b;
+}
+
+.medicament-content {
+  padding: 1.25rem;
+  background: white;
+}
+
+.medicament-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.medicament-description {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.medicament-meta {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dosage {
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+.forme {
+  color: #059669;
+  font-size: 1rem;
 }
 
 /* Footer */
