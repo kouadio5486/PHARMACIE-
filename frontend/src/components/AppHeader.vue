@@ -90,7 +90,7 @@ const navItems = [
 }
 
 .logo-image {
-  height: 73px;
+  height: 110px;
   width: auto;
   object-fit: contain;
 }

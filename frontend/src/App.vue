@@ -76,14 +76,12 @@ const features = [
 
     <!-- Hero Section -->
     <section class="hero-section" :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${heroImage})` }">
-      <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">PharmaCI</h1>
-          <p class="hero-subtitle">Votre plateforme pour consulter les prix des médicaments et vérifier leur disponibilité en pharmacie.</p>
-          <div class="hero-buttons">
-            <BaseButton size="large">Rechercher un médicament</BaseButton>
-            <BaseButton variant="secondary" size="large">Voir les pharmacies</BaseButton>
-          </div>
+      <div class="hero-content">
+        <h1 class="hero-title">PharmaCI</h1>
+        <p class="hero-subtitle">Votre plateforme pour consulter les prix des médicaments et vérifier leur disponibilité en pharmacie.</p>
+        <div class="hero-buttons">
+          <BaseButton size="large">Rechercher un médicament</BaseButton>
+          <BaseButton variant="secondary" size="large">Voir les pharmacies</BaseButton>
         </div>
       </div>
     </section>
@@ -135,6 +133,7 @@ const features = [
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .container {
@@ -143,15 +142,22 @@ const features = [
   padding: 0 20px;
 }
 
-/* Hero Section */
+/* Hero Section  pour agrandir image*/
 .hero-section {
-  min-height: 50vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 80px 0;
+  justify-content: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;
+  position: relative;
+  left: 0;
+  right: 0;
 }
 
 .hero-content {
@@ -160,6 +166,7 @@ const features = [
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  padding: 0 20px;
 }
 
 .hero-title {
@@ -302,10 +309,6 @@ const features = [
     font-size: 48px;
   }
 
-  .hero-section {
-    padding: 60px 0;
-  }
-
   .features-section {
     padding: 60px 0;
   }
@@ -329,5 +332,18 @@ const features = [
   .hero-buttons button {
     width: 100%;
   }
+}
+</style>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  width: 100%;
+  overflow-x: hidden;
 }
 </style>
