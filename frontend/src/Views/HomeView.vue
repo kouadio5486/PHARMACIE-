@@ -5,6 +5,9 @@ import heroImage from '../assets/phar.jpg'
 import paracetamolImage from '../assets/image/paracetamol.png'
 import amoxicillineImage from '../assets/image/amoxicilline.png'
 import metformineImage from '../assets/image/metformine.png'
+import phar1Image from '../assets/image/pha1.webp'
+import phar2Image from '../assets/image/phar2.jpg'
+import phar3Image from '../assets/image/phar3.avif'
 
 const features = [
   {
@@ -174,6 +177,79 @@ const features = [
               <div class="medicament-meta">
                 <span class="dosage">850 mg</span>
                 <span class="forme">Comprimé</span>
+              </div>
+            </div>
+          </BaseCard>
+        </div>
+      </div>
+    </section>
+    <!-- Pharmacies Section -->
+    <section id="pharmacies" class="pharmacies-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Nos pharmacies</h2>
+          <p class="section-subtitle">
+            Découvrez les pharmacies les plus proches de vous
+          </p>
+        </div>
+
+        <div class="pharmacies-grid">
+          <!-- Pharmacie 1 -->
+          <BaseCard class="pharmacy-card" variant="elevated">
+            <div class="pharmacy-image">
+              <img :src="phar1Image" alt="Pharmacie 1" />
+              <div class="pharmacy-status open">
+                Ouvert
+              </div>
+            </div>
+            <div class="pharmacy-content">
+              <h3 class="pharmacy-title">Pharmacie du Centre</h3>
+              <p class="pharmacy-address">
+                12 Rue de la République, 75001 Paris
+              </p>
+              <div class="pharmacy-meta">
+                <span class="phone">01 23 45 67 89</span>
+                <span class="hours">09:00 - 20:00</span>
+              </div>
+            </div>
+          </BaseCard>
+
+          <!-- Pharmacie 2 -->
+          <BaseCard class="pharmacy-card" variant="elevated">
+            <div class="pharmacy-image">
+              <img :src="phar2Image" alt="Pharmacie 2" />
+              <div class="pharmacy-status open">
+                Ouvert
+              </div>
+            </div>
+            <div class="pharmacy-content">
+              <h3 class="pharmacy-title">Pharmacie Saint-Louis</h3>
+              <p class="pharmacy-address">
+                45 Avenue des Fleurs, 75002 Paris
+              </p>
+              <div class="pharmacy-meta">
+                <span class="phone">01 98 76 54 32</span>
+                <span class="hours">08:30 - 19:30</span>
+              </div>
+            </div>
+          </BaseCard>
+
+          <!-- Pharmacie 3 -->
+          <BaseCard class="pharmacy-card" variant="elevated">
+            <div class="pharmacy-image">
+              <img :src="phar3Image" alt="Pharmacie 3" />
+              <div class="pharmacy-status closed">
+                Fermé
+              </div>
+            </div>
+            <div class="pharmacy-content">
+              <h3 class="pharmacy-title">Pharmacie des Arts</h3>
+              <p class="pharmacy-address">
+                78 Rue des Arts, 75003 Paris
+              </p>
+              <div class="pharmacy-meta">
+                <span class="phone">01 12 34 56 78</span>
+                <span class="hours">10:00 - 18:00</span>
               </div>
             </div>
           </BaseCard>
@@ -419,6 +495,102 @@ const features = [
 }
 
 .forme {
+  color: #059669;
+  font-size: 1rem;
+}
+
+/* Pharmacies Section */
+.pharmacies-section {
+  padding: 30px 0 80px;
+  background: #ffffff;
+}
+
+.pharmacies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pharmacy-card {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pharmacy-card :deep(.base-card) {
+  padding: 0;
+}
+
+.pharmacy-card:hover {
+  transform: translateY(-8px);
+}
+
+.pharmacy-image {
+  position: relative;
+  height: 220px;
+}
+
+.pharmacy-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pharmacy-status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.open {
+  background: #10b981;
+}
+
+.closed {
+  background: #ef4444;
+}
+
+.pharmacy-content {
+  padding: 1.25rem;
+  background: white;
+}
+
+.pharmacy-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pharmacy-address {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.pharmacy-meta {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.phone {
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+.hours {
   color: #059669;
   font-size: 1rem;
 }
