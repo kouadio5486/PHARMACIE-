@@ -203,13 +203,13 @@ const features = [
               </div>
             </div>
             <div class="pharmacy-content">
-              <h3 class="pharmacy-title">Pharmacie du Centre</h3>
+              <h3 class="pharmacy-title">pharmacies de Gade</h3>
               <p class="pharmacy-address">
-                12 Rue de la République, 75001 Paris
+                Place de Gade, Cocody, Abidjan
               </p>
               <div class="pharmacy-meta">
-                <span class="phone">01 23 45 67 89</span>
-                <span class="hours">09:00 - 20:00</span>
+                <span class="phone">+225 21 23 45 67</span>
+                <span class="hours">24:00 - 24:00</span>
               </div>
             </div>
           </BaseCard>
@@ -223,13 +223,13 @@ const features = [
               </div>
             </div>
             <div class="pharmacy-content">
-              <h3 class="pharmacy-title">Pharmacie Saint-Louis</h3>
+              <h3 class="pharmacy-title">Pharmacies paul</h3>
               <p class="pharmacy-address">
-                45 Avenue des Fleurs, 75002 Paris
+                Boulevard de la République, Plateau, Abidjan
               </p>
               <div class="pharmacy-meta">
-                <span class="phone">01 98 76 54 32</span>
-                <span class="hours">08:30 - 19:30</span>
+                <span class="phone">+225 21 98 76 54</span>
+                <span class="hours">08:00 - 20:00</span>
               </div>
             </div>
           </BaseCard>
@@ -243,16 +243,27 @@ const features = [
               </div>
             </div>
             <div class="pharmacy-content">
-              <h3 class="pharmacy-title">Pharmacie des Arts</h3>
+              <h3 class="pharmacy-title">Pharmacies de Riviera</h3>
               <p class="pharmacy-address">
-                78 Rue des Arts, 75003 Paris
+                Rue des Martyrs, Riviera 2, Abidjan
               </p>
               <div class="pharmacy-meta">
-                <span class="phone">01 12 34 56 78</span>
-                <span class="hours">10:00 - 18:00</span>
+                <span class="phone">+225 21 12 34 56</span>
+                <span class="hours">08:00 - 20:00</span>
               </div>
             </div>
           </BaseCard>
+        </div>
+      </div>
+    </section>
+    <!-- réservations Section -->
+    <section id="reservations" class="reservations-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Réservations</h2>
+          <p class="section-subtitle">
+            Réservez votre rendez-vous en ligne
+          </p>
         </div>
       </div>
     </section>
