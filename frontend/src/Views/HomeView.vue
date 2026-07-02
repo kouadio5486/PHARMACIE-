@@ -8,6 +8,9 @@ import metformineImage from '../assets/image/metformine.png'
 import phar1Image from '../assets/image/pha1.webp'
 import phar2Image from '../assets/image/phar2.jpg'
 import phar3Image from '../assets/image/phar3.avif'
+import ord1Image from '../assets/image/ord1.webp'
+import ord2Image from '../assets/image/ord2.webp'
+import ord3Image from '../assets/image/ord3.jpg'
 
 const features = [
   {
@@ -282,7 +285,76 @@ const features = [
         </div>
       </div>
     </section>
+    <!-- Ordonnance Section -->
+    <section id="ordonnance" class="ordonnance-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Ordonnance</h2>
+          <p class="section-subtitle">
+            Réservez votre ordonnance en ligne
+          </p>
+        </div>
 
+        <div class="ordonnance-grid">
+          <BaseCard class="ordonnance-card" variant="elevated">
+            <div class="ordonnance-image">
+              <img :src="ord1Image" alt="Pharmacies de Gade" />
+              <div class="ordonnance-status open">
+                Ouvert
+              </div>
+            </div>
+            <div class="ordonnance-content">
+              <h3 class="ordonnance-title">pharmacies de Gade</h3>
+              <p class="ordonnance-address">
+                Place de Gade, Cocody, Abidjan
+              </p>
+              <div class="ordonnance-meta">
+                <span class="phone">+225 21 23 45 67</span>
+                <span class="hours">24:00 - 24:00</span>
+              </div>
+            </div>
+          </BaseCard>
+
+          <BaseCard class="ordonnance-card" variant="elevated">
+            <div class="ordonnance-image">
+              <img :src="ord2Image" alt="Pharmacies paul" />
+              <div class="ordonnance-status open">
+                Ouvert
+              </div>
+            </div>
+            <div class="ordonnance-content">
+              <h3 class="ordonnance-title">Pharmacies paul</h3>
+              <p class="ordonnance-address">
+                Boulevard de la République, Plateau, Abidjan
+              </p>
+              <div class="ordonnance-meta">
+                <span class="phone">+225 21 98 76 54</span>
+                <span class="hours">08:00 - 20:00</span>
+              </div>
+            </div>
+          </BaseCard>
+
+          <BaseCard class="ordonnance-card" variant="elevated">
+            <div class="ordonnance-image">
+              <img :src="ord3Image" alt="Pharmacies de Riviera" />
+              <div class="ordonnance-status closed">
+                Fermé
+              </div>
+            </div>
+            <div class="ordonnance-content">
+              <h3 class="ordonnance-title">Pharmacies de Riviera</h3>
+              <p class="ordonnance-address">
+                Rue des Martyrs, Riviera 2, Abidjan
+              </p>
+              <div class="ordonnance-meta">
+                <span class="phone">+225 21 12 34 56</span>
+                <span class="hours">08:00 - 20:00</span>
+              </div>
+            </div>
+          </BaseCard>
+        </div>
+      </div>
+    </section>
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -621,6 +693,88 @@ const features = [
   font-size: 1rem;
 }
 
+/* Ordonnance Section */
+.ordonnance-section {
+  padding: 30px 0 80px;
+  background: #f8fafc;
+}
+
+.ordonnance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ordonnance-card {
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.ordonnance-card :deep(.base-card) {
+  padding: 0;
+}
+
+.ordonnance-card:hover {
+  transform: translateY(-8px);
+}
+
+.ordonnance-image {
+  position: relative;
+  height: 220px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.ordonnance-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ordonnance-status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.ordonnance-content {
+  padding: 1.25rem;
+  background: white;
+  text-align: center;
+}
+
+.ordonnance-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ordonnance-address {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.ordonnance-meta {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
 /* Réservation Section */
 .reservation-section {
   padding: 60px 0;
@@ -723,6 +877,10 @@ const features = [
 
   .features-section {
     padding: 60px 0;
+  }
+
+  .ordonnance-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
   .footer-content {
