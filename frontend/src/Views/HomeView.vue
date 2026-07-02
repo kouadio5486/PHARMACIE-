@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import BaseButton from '../components/BaseButton.vue'
 import BaseCard from '../components/BaseCard.vue'
 import heroImage from '../assets/phar.jpg'
@@ -9,20 +8,6 @@ import metformineImage from '../assets/image/metformine.png'
 import phar1Image from '../assets/image/pha1.webp'
 import phar2Image from '../assets/image/phar2.jpg'
 import phar3Image from '../assets/image/phar3.avif'
-
-// Toggle delivery address based on selected mode
-onMounted(() => {
-  const modeInputs = document.querySelectorAll('input[name="mode"]')
-  const deliveryGroup = document.getElementById('deliveryAddressGroup')
-
-  modeInputs.forEach((input) => {
-    input.addEventListener('change', () => {
-      if (deliveryGroup) {
-        deliveryGroup.style.display = (input as HTMLInputElement).value === 'delivery' ? 'block' : 'none'
-      }
-    })
-  })
-})
 
 const features = [
   {
@@ -286,82 +271,14 @@ const features = [
     <!-- Réservation Section -->
     <section id="reservation" class="reservation-section">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Réserver un médicament</h2>
-          <p class="section-subtitle">
-            Réservez vos médicaments en ligne et récupérez-les en pharmacie
+        <div class="reservation-cta">
+          <h2 class="cta-title">Besoin de médicaments ?</h2>
+          <p class="cta-subtitle">
+            Réservez en ligne et récupérez en pharmacie ou choisissez la livraison par Yango Moto
           </p>
-        </div>
-
-        <div class="reservation-form-container">
-          <BaseCard class="reservation-card">
-            <form class="reservation-form">
-              <div class="form-group">
-                <label for="medicament">Médicament</label>
-                <select id="medicament" class="form-input">
-                  <option value="">Choisissez un médicament</option>
-                  <option value="paracetamol">Paracétamol 500mg</option>
-                  <option value="amoxicilline">Amoxicilline 500mg</option>
-                  <option value="metformine">Metformine 850mg</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="pharmacie">Pharmacie</label>
-                <select id="pharmacie" class="form-input">
-                  <option value="">Choisissez une pharmacie</option>
-                  <option value="gare">Pharmacie de la Gare</option>
-                  <option value="leclerc">Pharmacie Leclerc</option>
-                  <option value="riviera">Pharmacie de Riviera</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="nom">Nom complet</label>
-                <input type="text" id="nom" class="form-input" placeholder="Votre nom complet" />
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Numéro de téléphone</label>
-                <input type="tel" id="phone" class="form-input" placeholder="+225 XX XX XX XX XX" />
-              </div>
-
-              <div class="form-group">
-                <label for="quantity">Quantité</label>
-                <input type="number" id="quantity" class="form-input" min="1" value="1" />
-              </div>
-
-              <div class="form-group">
-                <label>Mode de récupération</label>
-                <div class="radio-group">
-                  <label class="radio-option">
-                    <input type="radio" name="mode" value="pickup" checked />
-                    <span>Retrait en pharmacie</span>
-                  </label>
-                  <label class="radio-option">
-                    <input type="radio" name="mode" value="delivery" />
-                    <span>Livraison par Yango Moto</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-group delivery-address" id="deliveryAddressGroup" style="display: none;">
-                <label for="address">Adresse de livraison</label>
-                <textarea id="address" class="form-input" rows="3" placeholder="Votre adresse complète"></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="date">Date souhaitée</label>
-                <input type="date" id="date" class="form-input" />
-              </div>
-
-              <div class="form-actions">
-                <BaseButton type="submit" size="large" class="submit-btn">
-                  Confirmer la réservation
-                </BaseButton>
-              </div>
-            </form>
-          </BaseCard>
+          <BaseButton size="extra-large" class="cta-button">
+            Faire une réservation
+          </BaseButton>
         </div>
       </div>
     </section>
@@ -706,82 +623,41 @@ const features = [
 
 /* Réservation Section */
 .reservation-section {
-  padding: 30px 0 80px;
-  background: #f8fafc;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
 }
 
-.reservation-form-container {
-  max-width: 600px;
+.reservation-cta {
+  text-align: center;
+  max-width: 700px;
   margin: 0 auto;
 }
 
-.reservation-card :deep(.base-card) {
-  padding: 2rem;
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
-.reservation-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.cta-subtitle {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  line-height: 1.6;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-.form-input {
-  padding: 0.875rem 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+.cta-button {
   background: white;
+  color: #2563eb;
+  font-weight: 700;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.radio-group {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.radio-option input[type="radio"] {
-  width: 1.25rem;
-  height: 1.25rem;
-  accent-color: #2563eb;
-}
-
-.radio-option span {
-  font-size: 1rem;
-  color: #111827;
-}
-
-.form-actions {
-  margin-top: 0.5rem;
-}
-
-.submit-btn {
-  width: 100%;
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Footer */

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   variant?: 'primary' | 'secondary' | 'outline'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'extra-large'
   disabled?: boolean
 }
 
@@ -81,5 +81,10 @@ const props = withDefaults(defineProps<Props>(), {
 .size-large {
   padding: 14px 28px;
   font-size: 18px;
+}
+
+.size-extra-large {
+  padding: 18px 40px;
+  font-size: 20px;
 }
 </style>
