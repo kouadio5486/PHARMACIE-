@@ -723,7 +723,8 @@ const features = [
 
 .ordonnance-image {
   position: relative;
-  height: 220px;
+  height: 280px;
+  background: #f1f5f9;
   border-radius: 12px 12px 0 0;
   overflow: hidden;
 }
@@ -731,7 +732,8 @@ const features = [
 .ordonnance-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 }
 
 .ordonnance-status {
