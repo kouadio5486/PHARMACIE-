@@ -78,6 +78,13 @@ const features = [
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
         <path d="M13.73 21a2 2 0 0 1-3.46 0" />
       </symbol>
+      <symbol id="phone" viewBox="0 0 24 24">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </symbol>
+      <symbol id="clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </symbol>
     </svg>
 
     <!-- Hero Section -->
@@ -288,67 +295,116 @@ const features = [
     <!-- Ordonnance Section -->
     <section id="ordonnance" class="ordonnance-section">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header ordonnance-header">
+          <span class="ordonnance-eyebrow">Dépôt en ligne</span>
           <h2 class="section-title">Ordonnance</h2>
-          <p class="section-subtitle">
-            Réservez votre ordonnance en ligne
+          <p class="section-subtitle ordonnance-subtitle">
+            Déposez votre ordonnance et choisissez la pharmacie la plus proche de vous
           </p>
         </div>
 
         <div class="ordonnance-grid">
           <BaseCard class="ordonnance-card" variant="elevated">
-            <div class="ordonnance-image">
-              <img :src="ord1Image" alt="Pharmacies de Gade" />
+            <div class="ordonnance-image-wrap">
+              <div class="ordonnance-image">
+                <img :src="ord1Image" alt="Ordonnance — pharmacies de Gade" />
+              </div>
               <div class="ordonnance-status open">
+                <span class="status-dot" aria-hidden="true" />
                 Ouvert
               </div>
             </div>
             <div class="ordonnance-content">
               <h3 class="ordonnance-title">pharmacies de Gade</h3>
               <p class="ordonnance-address">
+                <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <use xlink:href="#map-pin" />
+                </svg>
                 Place de Gade, Cocody, Abidjan
               </p>
               <div class="ordonnance-meta">
-                <span class="phone">+225 21 23 45 67</span>
-                <span class="hours">24:00 - 24:00</span>
+                <span class="ordonnance-meta-item phone">
+                  <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <use xlink:href="#phone" />
+                  </svg>
+                  +225 21 23 45 67
+                </span>
+                <span class="ordonnance-meta-item hours">
+                  <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <use xlink:href="#clock" />
+                  </svg>
+                  24:00 - 24:00
+                </span>
               </div>
             </div>
           </BaseCard>
 
           <BaseCard class="ordonnance-card" variant="elevated">
-            <div class="ordonnance-image">
-              <img :src="ord2Image" alt="Pharmacies paul" />
+            <div class="ordonnance-image-wrap">
+              <div class="ordonnance-image">
+                <img :src="ord2Image" alt="Ordonnance — Pharmacies paul" />
+              </div>
               <div class="ordonnance-status open">
+                <span class="status-dot" aria-hidden="true" />
                 Ouvert
               </div>
             </div>
             <div class="ordonnance-content">
               <h3 class="ordonnance-title">Pharmacies paul</h3>
               <p class="ordonnance-address">
+                <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <use xlink:href="#map-pin" />
+                </svg>
                 Boulevard de la République, Plateau, Abidjan
               </p>
               <div class="ordonnance-meta">
-                <span class="phone">+225 21 98 76 54</span>
-                <span class="hours">08:00 - 20:00</span>
+                <span class="ordonnance-meta-item phone">
+                  <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <use xlink:href="#phone" />
+                  </svg>
+                  +225 21 98 76 54
+                </span>
+                <span class="ordonnance-meta-item hours">
+                  <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <use xlink:href="#clock" />
+                  </svg>
+                  08:00 - 20:00
+                </span>
               </div>
             </div>
           </BaseCard>
 
           <BaseCard class="ordonnance-card" variant="elevated">
-            <div class="ordonnance-image">
-              <img :src="ord3Image" alt="Pharmacies de Riviera" />
+            <div class="ordonnance-image-wrap">
+              <div class="ordonnance-image">
+                <img :src="ord3Image" alt="Ordonnance — Pharmacies de Riviera" />
+              </div>
               <div class="ordonnance-status closed">
+                <span class="status-dot" aria-hidden="true" />
                 Fermé
               </div>
             </div>
             <div class="ordonnance-content">
               <h3 class="ordonnance-title">Pharmacies de Riviera</h3>
               <p class="ordonnance-address">
+                <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <use xlink:href="#map-pin" />
+                </svg>
                 Rue des Martyrs, Riviera 2, Abidjan
               </p>
               <div class="ordonnance-meta">
-                <span class="phone">+225 21 12 34 56</span>
-                <span class="hours">08:00 - 20:00</span>
+                <span class="ordonnance-meta-item phone">
+                  <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <use xlink:href="#phone" />
+                  </svg>
+                  +225 21 12 34 56
+                </span>
+                <span class="ordonnance-meta-item hours">
+                  <svg class="ordonnance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <use xlink:href="#clock" />
+                  </svg>
+                  08:00 - 20:00
+                </span>
               </div>
             </div>
           </BaseCard>
@@ -695,37 +751,68 @@ const features = [
 
 /* Ordonnance Section */
 .ordonnance-section {
-  padding: 30px 0 80px;
-  background: #f8fafc;
+  padding: 60px 0 80px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 45%, #f8fafc 100%);
+}
+
+.ordonnance-header .ordonnance-eyebrow {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.875rem;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ordonnance-header .ordonnance-subtitle {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+  line-height: 1.6;
 }
 
 .ordonnance-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.75rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .ordonnance-card {
   overflow: hidden;
-  transition: all 0.3s ease;
-  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
 }
 
 .ordonnance-card :deep(.base-card) {
   padding: 0;
+  background: white;
 }
 
 .ordonnance-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+.ordonnance-image-wrap {
+  position: relative;
+  padding: 1rem 1rem 0;
 }
 
 .ordonnance-image {
   position: relative;
   height: 280px;
-  background: #f1f5f9;
-  border-radius: 12px 12px 0 0;
+  background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -734,47 +821,120 @@ const features = [
   height: 100%;
   object-fit: contain;
   object-position: center;
+  padding: 0.75rem;
+  box-sizing: border-box;
 }
 
 .ordonnance-status {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.ordonnance-status.open {
+  background: rgba(255, 255, 255, 0.95);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.ordonnance-status.closed {
+  background: rgba(255, 255, 255, 0.95);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.ordonnance-status .status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ordonnance-status.open .status-dot {
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.ordonnance-status.closed .status-dot {
+  background: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
 }
 
 .ordonnance-content {
-  padding: 1.25rem;
+  padding: 1.25rem 1.5rem 1.5rem;
   background: white;
-  text-align: center;
+  text-align: left;
 }
 
 .ordonnance-title {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.625rem;
   color: #111827;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .ordonnance-address {
-  color: #4b5563;
-  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: #64748b;
+  line-height: 1.5;
   margin-bottom: 1rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+}
+
+.ordonnance-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.ordonnance-address .ordonnance-icon {
+  color: #94a3b8;
 }
 
 .ordonnance-meta {
-  margin-top: 1rem;
   display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  padding-top: 0.75rem;
-  border-top: 1px solid #e5e7eb;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.ordonnance-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ordonnance-meta-item.phone {
+  color: #2563eb;
+}
+
+.ordonnance-meta-item.phone .ordonnance-icon {
+  color: #2563eb;
+}
+
+.ordonnance-meta-item.hours {
+  color: #059669;
+}
+
+.ordonnance-meta-item.hours .ordonnance-icon {
+  color: #059669;
 }
 
 /* Réservation Section */
@@ -885,6 +1045,10 @@ const features = [
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
+  .ordonnance-section {
+    padding: 50px 0 70px;
+  }
+
   .footer-content {
     flex-direction: column;
     text-align: center;
@@ -903,6 +1067,19 @@ const features = [
 
   .hero-buttons button {
     width: 100%;
+  }
+
+  .ordonnance-image {
+    height: 240px;
+  }
+
+  .ordonnance-content {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .ordonnance-meta {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
 </style>
