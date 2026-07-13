@@ -11,6 +11,8 @@ class AIInteractionAdmin(admin.ModelAdmin):
         "type",
         "short_input",
         "short_output",
+        "has_input_audio",
+        "has_output_audio",
         "created_at",
     )
 
@@ -53,6 +55,7 @@ class AIInteractionAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "input",
+                    "input_audio",
                 ),
             },
         ),
@@ -61,6 +64,7 @@ class AIInteractionAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "output",
+                    "output_audio",
                 ),
             },
         ),
@@ -88,8 +92,16 @@ class AIInteractionAdmin(admin.ModelAdmin):
 
     @admin.display(description="Entrée")
     def short_input(self, obj):
-        return obj.input[:40] + "..." if len(obj.input) > 40 else obj.input
+        return obj.input[:40] + "..." if (obj.input and len(obj.input) > 40) else obj.input or "-"
 
     @admin.display(description="Réponse")
     def short_output(self, obj):
-        return obj.output[:40] + "..." if len(obj.output) > 40 else obj.output
+        return obj.output[:40] + "..." if (obj.output and len(obj.output) > 40) else obj.output or "-"
+
+    @admin.display(description="Audio entrée", boolean=True)
+    def has_input_audio(self, obj):
+        return bool(obj.input_audio)
+
+    @admin.display(description="Audio réponse", boolean=True)
+    def has_output_audio(self, obj):
+        return bool(obj.output_audio)

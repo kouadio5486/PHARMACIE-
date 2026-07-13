@@ -22,7 +22,9 @@ class AIInteractionSerializer(serializers.ModelSerializer):
             "id",
             "user",
             "input",
+            "input_audio",
             "output",
+            "output_audio",
             "type",
             "type_display",
             "context",
@@ -37,7 +39,7 @@ class AIInteractionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         # Champs autorisés lors de la création.
         model = AIInteraction
-        fields = ("input", "output", "type", "context")
+        fields = ("input", "input_audio", "output", "output_audio", "type", "context")
         # Champs qui seront utilisés pour la création.
     def create(self, validated_data):
         return AIInteraction.objects.create(

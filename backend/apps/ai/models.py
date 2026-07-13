@@ -26,10 +26,28 @@ class AIInteraction(models.Model):
 
     input = models.TextField(
         verbose_name="Entrée utilisateur",
+        blank=True,
+        null=True
+    )
+
+    input_audio = models.FileField(
+        upload_to="ai/audio_inputs/",
+        blank=True,
+        null=True,
+        verbose_name="Audio d'entrée"
     )
 
     output = models.TextField(
         verbose_name="Réponse du système",
+        blank=True,
+        null=True
+    )
+
+    output_audio = models.FileField(
+        upload_to="ai/audio_outputs/",
+        blank=True,
+        null=True,
+        verbose_name="Audio de réponse"
     )
 
     type = models.CharField(
@@ -57,4 +75,8 @@ class AIInteraction(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.user} - {self.input[:30]}"
+        if self.input:
+            return f"{self.user} - {self.input[:30]}"
+        elif self.input_audio:
+            return f"{self.user} - Audio"
+        return f"{self.user} - {self.created_at}"

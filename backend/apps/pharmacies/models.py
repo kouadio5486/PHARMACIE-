@@ -49,6 +49,8 @@ class Pharmacie(models.Model):
         related_name="pharmacies",
         limit_choices_to={"role": "pharmacien"},
         verbose_name="Pharmacien responsable",
+        null=True,
+        blank=True
     )
 
     #  Infos générales
@@ -65,6 +67,8 @@ class Pharmacie(models.Model):
         on_delete=models.PROTECT,
         related_name="pharmacies",
         verbose_name="Ville",
+        null=True,
+        blank=True
     )
 
     commune = models.CharField(
