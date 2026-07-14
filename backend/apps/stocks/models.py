@@ -56,12 +56,19 @@ class Stock(models.Model):
         verbose_name_plural = "Stocks"
         ordering = ["pharmacie", "medicament"]
 
-        # ✅ VERSION PRO (remplace unique_together)
+        #  VERSION PRO (remplace unique_together)
         constraints = [
             models.UniqueConstraint(
                 fields=["pharmacie", "medicament"],
                 name="unique_stock_par_pharmacie_medicament"
             )
+        ]
+
+        #  Index pour optimiser les requêtes
+        indexes = [
+            models.Index(fields=["pharmacie"]),
+            models.Index(fields=["medicament"]),
+            models.Index(fields=["date_mise_a_jour"]),
         ]
 
     def __str__(self):
