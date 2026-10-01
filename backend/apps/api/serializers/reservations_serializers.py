@@ -19,6 +19,8 @@ class ReservationSerializer(serializers.ModelSerializer):
         max_digits=12, decimal_places=2, read_only=True
     )
     statut_display = serializers.CharField(source="get_statut_display", read_only=True)
+    paiement_medicaments_ok = serializers.BooleanField(read_only=True)
+    a_livraison = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Reservation
@@ -31,28 +33,53 @@ class ReservationSerializer(serializers.ModelSerializer):
             "statut",
             "statut_display",
             "total_prix",
+            "besoin_livraison",
+            "adresse_livraison",
+            "contact_livraison",
+            "paiement_medicaments_ok",
+            "a_livraison",
             "created_at",
+            "updated_at",
         )
-        read_only_fields = ("id", "user", "total_prix", "created_at", "statut_display")
+        read_only_fields = (
+            "id", "user", "total_prix", "created_at", "updated_at",
+            "statut_display", "paiement_medicaments_ok", "a_livraison"
+        )
 
 
 class ReservationCreateSerializer(serializers.ModelSerializer):
-    """Création de réservation par le patient."""
+    """
+    Création de réservation par le patient.
+    Optionnellement, il peut préciser qu'il souhaite une livraison.
+    """
 
     class Meta:
         model = Reservation
-        fields = ("pharmacie", "medicament", "quantite")
+        fields = (
+            "pharmacie",
+            "medicament",
+            "quantite",
+            "besoin_livraison",
+            "adresse_livraison",
+            "contact_livraison",
+        )
 
     def validate(self, attrs):
+        # Si livraison demandée : adresse obligatoire
+        if attrs.get("besoin_livraison") and not attrs.get("adresse_livraison"):
+            raise serializers.ValidationError(
+                {"adresse_livraison": "Adresse de livraison requise."}
+            )
+
         pharmacie = attrs["pharmacie"]
         medicament = attrs["medicament"]
         quantite = attrs["quantite"]
- # Vérifie que la pharmacie est active
+
         if not pharmacie.is_active:
             raise serializers.ValidationError(
                 {"pharmacie": "Cette pharmacie n'est pas active."}
             )
- # Vérifie le stock du médicament dans cette pharmacie
+
         stock = Stock.objects.filter(
             pharmacie=pharmacie, medicament=medicament
         ).first()
@@ -61,9 +88,8 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {"quantite": "Stock insuffisant dans cette pharmacie."}
             )
- # Vérifie si ordonnance obligatoire
+
         if medicament.ordonnance_requise:
-             # Utilisateur connecté
             user = self.context["request"].user
             ordonnance_validee = user.ordonnances.filter(statut="validee").exists()
             if not ordonnance_validee:

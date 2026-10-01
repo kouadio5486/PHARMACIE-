@@ -6,27 +6,63 @@ from apps.users.models import User
 
 
 class Ville(models.Model):
-    """Référentiel des villes de Côte d'Ivoire utilisé par l'application."""
+    """
+    Référentiel des localités de Côte d'Ivoire :
+    - "ville"    : grande ville (Abidjan, Bouaké, Yamoussoukro...)
+    - "commune"  : commune ou arrondissement (Cocody, Plateau, Abobo...)
+    - "village"  : village ou zone rurale (Kouto, Tiébissou Est, Danané...)
 
-    nom = models.CharField(max_length=100, unique=True, verbose_name="Nom de la ville")
+    La même table regroupe les 3 types (même informations : nom, GPS, région...),
+    ce qui permet d'ajouter progressivement toutes les localités sans nouveau modèle.
+    """
+
+    TYPE_VILLE = "ville"
+    TYPE_COMMUNE = "commune"
+    TYPE_VILLAGE = "village"
+
+    TYPE_CHOICES = (
+        (TYPE_VILLE, "Ville"),
+        (TYPE_COMMUNE, "Commune"),
+        (TYPE_VILLAGE, "Village"),
+    )
+
+    type = models.CharField(
+        max_length=20,
+        choices=TYPE_CHOICES,
+        default=TYPE_VILLE,
+        verbose_name="Type de localité",
+        help_text="Permet de distinguer les grandes villes des communes et villages.",
+    )
+
+    nom = models.CharField(max_length=120, unique=True, verbose_name="Nom de la localité")
     code = models.CharField(max_length=20, unique=True, blank=True, verbose_name="Code")
-    slug = models.SlugField(max_length=120, unique=True, blank=True, verbose_name="Slug")
+    slug = models.SlugField(max_length=140, unique=True, blank=True, verbose_name="Slug")
     district = models.CharField(max_length=120, blank=True, null=True, verbose_name="District")
     region = models.CharField(max_length=120, blank=True, null=True, verbose_name="Région")
     latitude = models.FloatField(blank=True, null=True, validators=[MinValueValidator(-90), MaxValueValidator(90)], verbose_name="Latitude")
     longitude = models.FloatField(blank=True, null=True, validators=[MinValueValidator(-180), MaxValueValidator(180)], verbose_name="Longitude")
+    population = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name="Population approximative",
+        help_text="Optionnel, utile pour prioriser les zones.",
+    )
     is_active = models.BooleanField(default=True, verbose_name="Active")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "villes"
-        verbose_name = "Ville"
-        verbose_name_plural = "Villes"
-        ordering = ["nom"]
+        verbose_name = "Localité (ville / commune / village)"
+        verbose_name_plural = "Localités (villes / communes / villages)"
+        ordering = ["type", "nom"]
+        indexes = [
+            models.Index(fields=["type", "is_active"]),
+            models.Index(fields=["region", "type"]),
+        ]
 
     def __str__(self):
-        return self.nom
+        return f"{self.nom} ({self.get_type_display()})"
 
     def save(self, *args, **kwargs):
         base_slug = slugify(self.nom)
@@ -66,15 +102,24 @@ class Pharmacie(models.Model):
         Ville,
         on_delete=models.PROTECT,
         related_name="pharmacies",
-        verbose_name="Ville",
+        verbose_name="Localité (ville / commune / village)",
         null=True,
-        blank=True
+        blank=True,
+        help_text="Choisissez dans la liste si votre localité existe. Sinon, laissez vide et remplissez le champ « Localité (texte libre) » ci-dessous.",
+    )
+
+    localite_libre = models.CharField(
+        max_length=150,
+        blank=True,
+        null=True,
+        verbose_name="Localité (texte libre)",
+        help_text="Si votre village/commune n'est pas dans la liste déroulante du dessus : écrivez son nom ici (ex: Village Tiébissou, Kouto, Danané).",
     )
 
     commune = models.CharField(
         max_length=100,
-        verbose_name="Commune / quartier",
-        help_text="Quartier ou secteur (ex. Cocody à Abidjan, centre-ville à M'batto).",
+        verbose_name="Commune / quartier / secteur",
+        help_text="Précision dans la localité (ex: Cocody à Abidjan, centre-ville à M'batto, marché du village).",
     )
 
     telephone = models.CharField(
@@ -140,7 +185,13 @@ class Pharmacie(models.Model):
         ordering = ["nom"]
 
     def __str__(self):
-        return f"{self.nom} - {self.ville.nom} ({self.commune})"
+        localite = None
+        if self.ville:
+            localite = str(self.ville)
+        elif self.localite_libre:
+            localite = self.localite_libre
+        localite_txt = localite or "Localité non renseignée"
+        return f"{self.nom} - {localite_txt} ({self.commune})"
 
     #  Permissions métier
     @property

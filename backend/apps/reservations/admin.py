@@ -12,12 +12,16 @@ class ReservationAdmin(admin.ModelAdmin):
         "medicament",
         "quantite",
         "statut",
+        "besoin_livraison",
+        "paiement_ok",
+        "livree",
         "total_prix_display",
         "created_at",
     )
 
     list_filter = (
         "statut",
+        "besoin_livraison",
         "pharmacie",
         "created_at",
     )
@@ -28,22 +32,23 @@ class ReservationAdmin(admin.ModelAdmin):
         "user__email",
         "pharmacie__nom",
         "medicament__nom",
+        "adresse_livraison",
     )
 
-    ordering = (
-        "-created_at",
-    )
-
-    list_per_page = 20
+    ordering = ("-created_at",)
+    list_per_page = 30
 
     readonly_fields = (
         "created_at",
+        "updated_at",
         "total_prix_display",
+        "paiement_ok",
+        "livree",
     )
 
     fieldsets = (
         (
-            "Informations utilisateur",
+            "Informations patient",
             {
                 "fields": (
                     "user",
@@ -61,10 +66,27 @@ class ReservationAdmin(admin.ModelAdmin):
             },
         ),
         (
-            "Statut",
+            "Option livraison",
+            {
+                "fields": (
+                    "besoin_livraison",
+                    "adresse_livraison",
+                    "contact_livraison",
+                ),
+                "description": (
+                    "Si besoin_livraison est coché : la pharmacie créera une Delivery. "
+                    "Le patient paie les médicaments à la pharmacie, "
+                    "PUIS paie la livraison (en espèces / Mobile Money) au livreur à la réception."
+                ),
+            },
+        ),
+        (
+            "Statut & suivi",
             {
                 "fields": (
                     "statut",
+                    "paiement_ok",
+                    "livree",
                 ),
             },
         ),
@@ -73,11 +95,12 @@ class ReservationAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "created_at",
+                    "updated_at",
                 ),
             },
         ),
         (
-            "Total",
+            "Total médicaments (sans livraison)",
             {
                 "fields": (
                     "total_prix_display",
@@ -86,10 +109,22 @@ class ReservationAdmin(admin.ModelAdmin):
         ),
     )
 
-    # ==========================
-    #  AFFICHAGE DU TOTAL
-    # ==========================
     def total_prix_display(self, obj):
-        return obj.total_prix
+        return f"{obj.total_prix} FCFA"
 
-    total_prix_display.short_description = "Prix total (FCFA)"
+    total_prix_display.short_description = "Prix médicaments (FCFA)"
+
+    def paiement_ok(self, obj):
+        return obj.paiement_medicaments_ok
+
+    paiement_ok.boolean = True
+    paiement_ok.short_description = "Médicaments payés"
+
+    def livree(self, obj):
+        return obj.deliveries.filter(statut=Delivery.STATUS_LIVRE).exists()
+
+    livree.boolean = True
+    livree.short_description = "Livrée"
+
+
+from apps.deliveries.models import Delivery  # noqa: E402

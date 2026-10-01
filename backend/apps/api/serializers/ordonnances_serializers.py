@@ -1,9 +1,11 @@
 from rest_framework import serializers
 # Modèle Ordonnance (table des ordonnances en base)
 from apps.ordonnances.models import Ordonnance
+from apps.pharmacies.models import Pharmacie
 
 # Serializer utilisateur (affichage sécurisé)
 from .users_serializers import UserPublicSerializer
+from .pharmacies_serializers import PharmacieListSerializer
 
 
 class OrdonnanceSerializer(serializers.ModelSerializer):
@@ -12,10 +14,9 @@ class OrdonnanceSerializer(serializers.ModelSerializer):
     utilisé pour afficher les ordonnances
     """
 
-    # Affiche les infos publiques du patient
     user = UserPublicSerializer(read_only=True)
+    pharmacie = PharmacieListSerializer(read_only=True)
 
-    # Affiche le label humain du statut (ex: "Validée")
     statut_display = serializers.CharField(
         source="get_statut_display",
         read_only=True
@@ -26,30 +27,50 @@ class OrdonnanceSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "user",
+            "pharmacie",
             "fichier",
+            "medicaments_extraits",
             "statut",
             "statut_display",
             "commentaire",
             "created_at",
+            "updated_at",
         )
 
-        # champs non modifiables depuis l'API
-        read_only_fields = ("id", "user", "created_at", "statut_display")
+        read_only_fields = ("id", "user", "pharmacie", "created_at", "updated_at", "statut_display")
 
 
 class OrdonnanceUploadSerializer(serializers.ModelSerializer):
     """
-    Upload d'une ordonnance par un patient
+    Upload d'une ordonnance par un patient.
+
+    Workflow :
+    1. Le patient a déjà comparé les prix et choisi sa pharmacie.
+    2. Il envoie pharmacie_id + fichier + (optionnel) les médicaments extraits.
     """
+
+    pharmacie_id = serializers.PrimaryKeyRelatedField(
+        queryset=Pharmacie.objects.filter(is_active=True),
+        write_only=True,
+        required=True,
+        help_text="ID de la pharmacie choisie par le patient (souvent la moins chère).",
+    )
+
+    medicaments_extraits = serializers.JSONField(
+        required=False,
+        allow_null=True,
+        help_text="Liste des médicaments de l'ordonnance. Format : [{nom, dosage, quantite}]",
+    )
 
     class Meta:
         model = Ordonnance
-        fields = ("fichier",)
+        fields = ("fichier", "pharmacie_id", "medicaments_extraits")
 
     def create(self, validated_data):
-        # on force le user connecté
+        pharmacie = validated_data.pop("pharmacie_id")
         return Ordonnance.objects.create(
             user=self.context["request"].user,
+            pharmacie=pharmacie,
             **validated_data,
         )
 
@@ -63,13 +84,9 @@ class OrdonnanceValidationSerializer(serializers.ModelSerializer):
         model = Ordonnance
         fields = ("statut", "commentaire")
 
-    # ============================
-    # 🔴 CORRECTION IMPORTANTE
-    # ============================
     def validate(self, attrs):
         obj = self.instance
 
-        # ❌ Empêche modification si déjà validée
         if obj and obj.statut == Ordonnance.STATUT_VALIDEE:
             raise serializers.ValidationError(
                 "Impossible de modifier une ordonnance déjà validée."
@@ -78,7 +95,6 @@ class OrdonnanceValidationSerializer(serializers.ModelSerializer):
         return attrs
 
     def validate_statut(self, value):
-        # Statuts autorisés pour validation pharmacien
         autorises = {
             Ordonnance.STATUT_VALIDEE,
             Ordonnance.STATUT_REFUSEE

@@ -5,16 +5,63 @@ from .models import Pharmacie, Ville
 
 @admin.register(Ville)
 class VilleAdmin(admin.ModelAdmin):
-    list_display = ("id", "code", "nom", "district", "region", "is_active", "created_at")
-    list_filter = ("is_active", "district", "region")
+    list_display = (
+        "id",
+        "type",
+        "code",
+        "nom",
+        "district",
+        "region",
+        "population",
+        "is_active",
+        "created_at",
+    )
+    list_filter = ("type", "is_active", "district", "region")
     search_fields = ("code", "nom", "district", "region", "slug")
-    ordering = ("nom",)
+    ordering = ("type", "nom")
     readonly_fields = ("slug", "created_at", "updated_at")
+    list_per_page = 30
     fieldsets = (
-        ("Identification", {"fields": ("nom", "code", "slug")}),
-        ("Organisation", {"fields": ("district", "region", "is_active")}),
-        ("Localisation", {"fields": ("latitude", "longitude")}),
-        ("Dates", {"fields": ("created_at", "updated_at")}),
+        (
+            "Identification",
+            {
+                "fields": (
+                    "type",
+                    "nom",
+                    "code",
+                    "slug",
+                ),
+            },
+        ),
+        (
+            "Organisation",
+            {
+                "fields": (
+                    "district",
+                    "region",
+                    "population",
+                    "is_active",
+                ),
+            },
+        ),
+        (
+            "Localisation GPS",
+            {
+                "fields": (
+                    "latitude",
+                    "longitude",
+                ),
+            },
+        ),
+        (
+            "Dates",
+            {
+                "fields": (
+                    "created_at",
+                    "updated_at",
+                ),
+            },
+        ),
     )
 
 
@@ -25,6 +72,7 @@ class PharmacieAdmin(admin.ModelAdmin):
         "id",
         "nom",
         "ville",
+        "localite_libre",
         "commune",
         "telephone",
         "email",
@@ -36,7 +84,9 @@ class PharmacieAdmin(admin.ModelAdmin):
     )
 
     list_filter = (
+        "ville__type",
         "ville",
+        "localite_libre",
         "commune",
         "is_active",
         "is_pharmacie_de_garde",
@@ -46,7 +96,9 @@ class PharmacieAdmin(admin.ModelAdmin):
     search_fields = (
         "nom",
         "ville__nom",
+        "localite_libre",
         "commune",
+        "adresse",
         "telephone",
         "email",
         "responsable__nom",
@@ -79,11 +131,18 @@ class PharmacieAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "ville",
+                    "localite_libre",
                     "commune",
                     "adresse",
                     "latitude",
                     "longitude",
-                )
+                ),
+                "description": (
+                    "Règle : remplissez « ville » pour une localité référencée "
+                    "(ville/commune/village existant dans la base). "
+                    "Sinon, laissez « ville » vide et écrivez le nom du village "
+                    "dans « localite_libre ». Le GPS est obligatoire."
+                ),
             },
         ),
         (
